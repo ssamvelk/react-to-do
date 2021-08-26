@@ -1,0 +1,64 @@
+@mixin interactive() {
+}
+
+.category {
+  position: relative;
+
+  &__main {
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: white;
+    padding: 0;
+    padding-left: 40px;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  &__children {
+    width: 95%;
+    margin-left: auto;
+  }
+
+  &__title {
+    margin: 0;
+    border: none;
+    appearance: none;
+    outline: none;
+    max-width: 200px;
+    font-size: 20px;
+    // padding: 0 20px;
+    // text-align: center;
+  }
+
+  &__arrow {
+    position: absolute;
+    left: 7px;
+    top: 7px;
+  }
+
+  &__undo {
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      transform: translateX(-10px);
+    }
+  }
+
+  &__controls {
+    min-width: 80px;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 5px;
+  }
+}

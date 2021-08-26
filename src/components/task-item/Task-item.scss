@@ -1,0 +1,35 @@
+.task-item {
+  height: 100px;
+  display: flex;
+  position: relative;
+
+  &__checkbox {
+    position: absolute;
+    left: 20px;
+    top: 38px;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  &__title {
+    width: 100%;
+    flex-grow: 1;
+    padding: 0 60px;
+    font-size: 26px;
+    &_done {
+      text-decoration: line-through;
+    }
+  }
+
+  &__edit {
+    font-size: 20px;
+    position: absolute;
+    right: 20px;
+    top: 38px;
+    cursor: pointer;
+    transition: 0.3s all;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}

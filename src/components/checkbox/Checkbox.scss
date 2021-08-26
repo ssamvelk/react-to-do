@@ -1,6 +1,14 @@
 .checkbox {
   display: flex;
   align-items: center;
+  cursor: pointer;
+
+  &__control {
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
+  }
 
   &__text {
     padding: 0 10px;
