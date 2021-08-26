@@ -1,0 +1,16 @@
+.header {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px 0;
+  background-color: pink;
+
+  &__logo {
+    font-size: 26px;
+    font-weight: 700;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+  }
+}

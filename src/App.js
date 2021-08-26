@@ -3,28 +3,26 @@ import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import './App.scss';
+import ToDoList from './components/to-do-list/ToDoList';
 
 function App() {
   return (
     <Router>
-      <nav>
+      {/* <nav>
         <ul>
           <li>
             <Link to='/'>Home</Link>
           </li>
           <li>
-            <Link to='/counter'>About</Link>
+            <Link to='/counter'>counter</Link>
           </li>
           <li>
             <Link to='/users'>Users</Link>
           </li>
         </ul>
-      </nav>
+      </nav> */}
 
       <Switch>
-        <Route path='/'>
-          <h2>home</h2>
-        </Route>
         <Route path='/counter'>
           <div className='App'>
             <header className='App-header'>
@@ -76,6 +74,9 @@ function App() {
         </Route>
         <Route path='/users'>
           <h2>users</h2>
+        </Route>
+        <Route path='/'>
+          <ToDoList left={<h1>left</h1>} right={<h1>right</h1>}></ToDoList>
         </Route>
       </Switch>
     </Router>
