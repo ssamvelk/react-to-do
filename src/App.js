@@ -8,6 +8,9 @@ import TaskItem from './components/task-item/Task-item';
 import TaskList from './components/task-list/TaskList';
 import CategoryItem from './components/category-item/CategoryItem';
 
+import { taskList } from './constants/constants';
+import CategoryList from './components/category-list/CategoryList';
+
 function App() {
   return (
     <Router>
@@ -80,30 +83,8 @@ function App() {
         </Route>
         <Route path='/'>
           <ToDoList
-            left={
-              <>
-                <h1>left</h1>
-                <CategoryItem title='Category 1' />
-                <CategoryItem title='Category 2' />
-                <CategoryItem
-                  title='Category 3'
-                  isNested={true}
-                  nestedItems={[
-                    { id: 10, title: 'Category A' },
-                    {
-                      id: 11,
-                      title: 'Category B',
-                      isNested: true,
-                      nestedItems: [
-                        { id: 13, title: 'Category C' },
-                        { id: 14, title: 'Category D' },
-                      ],
-                    },
-                  ]}
-                />
-              </>
-            }
-            right={<TaskList></TaskList>}
+            left={<CategoryList />}
+            right={<TaskList tasks={taskList}></TaskList>}
           ></ToDoList>
         </Route>
       </Switch>
