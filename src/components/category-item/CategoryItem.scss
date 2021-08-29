@@ -4,6 +4,12 @@
 .category {
   position: relative;
 
+  &_active {
+    .category__main {
+      background-color: rgb(208, 247, 240);
+    }
+  }
+
   &__main {
     border: 1px solid;
     border-radius: 5px;
@@ -31,8 +37,7 @@
     outline: none;
     max-width: 200px;
     font-size: 20px;
-    // padding: 0 20px;
-    // text-align: center;
+    background-color: inherit;
   }
 
   &__arrow {

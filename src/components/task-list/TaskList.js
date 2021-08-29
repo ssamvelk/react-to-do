@@ -8,7 +8,12 @@ function TaskList({ tasks }) {
   return (
     <div>
       {tasks.map((task) => (
-        <TaskItem key={task.id} isDone={task.isDone} title={task.title} />
+        <TaskItem
+          key={task.id}
+          id={task.id}
+          isDone={task.isDone}
+          title={task.title}
+        />
       ))}
     </div>
   );
