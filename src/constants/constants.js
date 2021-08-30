@@ -59,6 +59,72 @@ const taskList = [
     isDone: false,
     categoryId: 1,
   },
+  {
+    id: 10,
+    title: 'To-Do item # 8',
+    isDone: false,
+    categoryId: 2,
+  },
+  {
+    id: 11,
+    title: 'To-Do item # 11',
+    isDone: false,
+    categoryId: 2,
+  },
+  {
+    id: 12,
+    title: 'To-Do item # 12',
+    isDone: false,
+    categoryId: 3,
+  },
+  {
+    id: 13,
+    title: 'To-Do item # 13',
+    isDone: true,
+    categoryId: 4,
+  },
+  {
+    id: 14,
+    title: 'To-Do item # 14',
+    isDone: false,
+    categoryId: 3,
+  },
+  {
+    id: 15,
+    title: 'To-Do item # 15',
+    isDone: false,
+    categoryId: 4,
+  },
+  {
+    id: 16,
+    title: 'To-Do item # 16',
+    isDone: false,
+    categoryId: 5,
+  },
+  {
+    id: 17,
+    title: 'To-Do item # 17',
+    isDone: false,
+    categoryId: 6,
+  },
+  {
+    id: 18,
+    title: 'To-Do item # 18',
+    isDone: false,
+    categoryId: 7,
+  },
+  {
+    id: 19,
+    title: 'To-Do item # 19',
+    isDone: true,
+    categoryId: 8,
+  },
+  {
+    id: 20,
+    title: 'To-Do item # 20',
+    isDone: false,
+    categoryId: 9,
+  },
 ];
 
 const categoryList = [

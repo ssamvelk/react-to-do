@@ -1,19 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './addButton.scss';
 
-export default function AddButton(props) {
+export default function AddButton({ placeholder, onClickHandler }) {
+  const [value, setValue] = useState('');
+
   return (
     <div className='add-button'>
       <input
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
         className='add-button__input'
-        placeholder={props.placeholder || 'Enter category title'}
+        placeholder={placeholder || 'add placeholder'}
+        onKeyPress={(e) => {
+          if (e.key === 'Enter' && onClickHandler) {
+            onClickHandler(value);
+            setValue('');
+          }
+        }}
       />
       <button
         className='add-button__button'
         onClick={
-          props.clickHandler
-            ? () => props.clickHandler()
+          onClickHandler
+            ? () => {
+                onClickHandler(value);
+                setValue('');
+              }
             : () => console.log('clickHandler')
         }
       >

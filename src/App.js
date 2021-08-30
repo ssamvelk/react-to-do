@@ -9,9 +9,11 @@ import TaskEditPage from './components/task-edit-page/TaskEditPage';
 import TaskEdit from './components/task-edit-page/task-edit/TaskEdit';
 import { useSelector } from 'react-redux';
 import { selectCategoriesList } from './store/categorySlice';
+import { selectTasksList } from './store/taskSlice';
 
 function App() {
   const _categories = useSelector(selectCategoriesList);
+  const _tasks = useSelector(selectTasksList);
   // const [categories, setCategories] = useState(_categories);
 
   console.log('render App', _categories);
@@ -31,7 +33,7 @@ function App() {
         <Route path='/'>
           <ToDoListPage
             left={<CategoryList categories={_categories} />}
-            right={<TaskList tasks={taskList}></TaskList>}
+            right={<TaskList tasks={_tasks}></TaskList>}
           />
         </Route>
       </Switch>

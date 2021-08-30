@@ -11,7 +11,8 @@ export const categorySlice = createSlice({
   initialState,
   reducers: {
     addCategory: (state, action) => {
-      state.categoryList.push(action.payload);
+      // state.categoryList.unshift(action.payload); // тут можно мутировать)
+      state.categoryList = [action.payload, ...state.categoryList];
     },
     deleteCategory: (state, action) => {
       state.categoryList = state.categoryList.filter(

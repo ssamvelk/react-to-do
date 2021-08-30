@@ -8,7 +8,13 @@ export default function Icon(props) {
       alt={props.altName || 'image'}
       width='20px'
       height='20px'
-      onClick={props.onClickHandler}
+      onClick={(e) => {
+        if (props.isPropagate === undefined || props.isPropagate === false) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        if (props.onClickHandler) props.onClickHandler();
+      }}
     />
   );
 }
