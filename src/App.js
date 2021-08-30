@@ -12,33 +12,25 @@ import { selectCategoriesList } from './store/categorySlice';
 
 function App() {
   const _categories = useSelector(selectCategoriesList);
-  const [categories, setCategories] = useState(_categories);
+  // const [categories, setCategories] = useState(_categories);
 
-  console.log('render');
-  useEffect(() => {
-    setCategories(categories);
-  }, [categories]);
+  console.log('render App', _categories);
+  // useEffect(() => {
+  //   setCategories(_categories);
+  // }, [categories]);
 
   return (
     <Router>
-      {/* <nav>
-        <ul>
-          <li>
-            <Link to='/'>Home</Link>
-          </li>
-        </ul>
-      </nav> */}
-
       <Switch>
         <Route path='/task/:id'>
           <TaskEditPage
-            left={<CategoryList categories={categories} isEditMode={true} />}
+            left={<CategoryList categories={_categories} isEditMode={true} />}
             right={<TaskEdit></TaskEdit>}
           />
         </Route>
         <Route path='/'>
           <ToDoListPage
-            left={<CategoryList categories={categories} />}
+            left={<CategoryList categories={_categories} />}
             right={<TaskList tasks={taskList}></TaskList>}
           />
         </Route>

@@ -60,6 +60,7 @@ function CategoryItem(props) {
             <CategoryItem
               id={item.id}
               key={item.id}
+              isActive={item.isActive}
               isEditMode={item.isEditMode}
               isNested={item.isNested}
               nestedItems={item.nestedItems}

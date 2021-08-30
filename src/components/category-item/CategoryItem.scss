@@ -5,7 +5,7 @@
   position: relative;
 
   &_active {
-    .category__main {
+    & > .category__main {
       background-color: rgb(208, 247, 240);
     }
   }

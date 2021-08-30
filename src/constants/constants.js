@@ -68,13 +68,14 @@ const categoryList = [
     isNested: false,
     isEditMode: false,
     nestedItems: [],
-    isActive: true,
+    isActive: false,
   },
   {
     id: 1,
     title: 'Category 1',
     isNested: false,
     isEditMode: false,
+    isActive: false,
     nestedItems: [],
   },
   {
@@ -82,19 +83,22 @@ const categoryList = [
     title: 'Category 2',
     isNested: true,
     isEditMode: false,
+    isActive: false,
     nestedItems: [
       {
         id: 3,
-        title: 'Category 2 2',
+        title: 'Category 2 1',
         isNested: false,
         isEditMode: false,
+        isActive: false,
         nestedItems: [],
       },
       {
         id: 4,
-        title: 'Category 2 1',
+        title: 'Category 2 2',
         isNested: false,
         isEditMode: false,
+        isActive: true,
         nestedItems: [],
       },
       {
@@ -102,18 +106,21 @@ const categoryList = [
         title: 'Category 2 2',
         isNested: true,
         isEditMode: false,
+        isActive: false,
         nestedItems: [
           {
             id: 6,
             title: 'Category 2 2 0',
             isNested: true,
             isEditMode: false,
+            isActive: false,
             nestedItems: [
               {
                 id: 7,
                 title: 'Category 2 2 0 1',
                 isNested: false,
                 isEditMode: false,
+                isActive: false,
                 nestedItems: [],
               },
               {
@@ -121,6 +128,7 @@ const categoryList = [
                 title: 'Category 2 2 0 2',
                 isNested: false,
                 isEditMode: false,
+                isActive: false,
                 nestedItems: [],
               },
             ],
@@ -134,6 +142,7 @@ const categoryList = [
     title: 'Category 9',
     isNested: false,
     isEditMode: false,
+    isActive: false,
     nestedItems: [],
   },
   {
@@ -141,12 +150,14 @@ const categoryList = [
     title: 'Category 10',
     isNested: true,
     isEditMode: false,
+    isActive: false,
     nestedItems: [
       {
         id: 11,
         title: 'Category 10 0',
         isNested: false,
         isEditMode: false,
+        isActive: false,
         nestedItems: [],
       },
       {
@@ -154,6 +165,7 @@ const categoryList = [
         title: 'Category 10 1',
         isNested: false,
         isEditMode: false,
+        isActive: false,
         nestedItems: [],
       },
     ],

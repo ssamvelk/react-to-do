@@ -3,7 +3,7 @@ import { categoryList } from '../constants/constants';
 
 const initialState = {
   categoryList: categoryList,
-  activeCategoryId: null,
+  activeCategoryId: 0,
 };
 
 export const categorySlice = createSlice({

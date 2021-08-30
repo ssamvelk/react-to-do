@@ -31,7 +31,12 @@ function CategoryList({ categories, isEditMode }) {
         }
         return { ...item, isActive: false };
       }
-      return changeActiveCategory(item.nestedItems);
+      // return changeActiveCategory(item.nestedItems);
+      return {
+        ...item,
+        isActive: item.id === activeItem,
+        nestedItems: changeActiveCategory(item.nestedItems),
+      };
     });
   });
 
@@ -62,10 +67,5 @@ function CategoryList({ categories, isEditMode }) {
     </div>
   );
 }
-
-CategoryList.propTypes = {
-  categories: PropTypes.array,
-  isEditMode: PropTypes.bool,
-};
 
 export default CategoryList;
