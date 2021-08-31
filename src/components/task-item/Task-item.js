@@ -10,11 +10,9 @@ import { updateTaskById } from '../../store/taskSlice';
 import './Task-item.scss';
 function TaskItem(props) {
   const dispatch = useDispatch();
-  // const _id = useSelector(selectActiveCategoryId);
   const [isDone, setIsDone] = useState(props.isDone);
 
   const toggleTask = (_isDone) => {
-    console.log('toogleTask', _isDone, props);
     setIsDone(_isDone);
     dispatch(updateTaskById({ ...props, isDone: _isDone }));
   };

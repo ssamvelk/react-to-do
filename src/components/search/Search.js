@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
 import Checkbox from '../checkbox/Checkbox';
 import Icon from '../icon/Icon';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleShowOnlyDone, selectShowOnlyDone } from '../../store/taskSlice';
 import clear from './clear.png';
 import './Search.scss';
 
 export default function Search() {
+  const dispatch = useDispatch();
+  const _showOnlyDone = useSelector(selectShowOnlyDone);
   const [searchValue, setSearchValue] = useState('');
+  const [showOnlyDone, setShowOnlyDone] = useState(_showOnlyDone);
+
+  const toggle = (_) => {
+    dispatch(toggleShowOnlyDone(!showOnlyDone));
+    setShowOnlyDone(_showOnlyDone);
+  };
 
   return (
     <div className='search'>
-      <Checkbox text='Show done'></Checkbox>
+      <Checkbox
+        isCheck={showOnlyDone}
+        text='Show done'
+        onClickHandler={toggle}
+      ></Checkbox>
       <input
         className='search__input'
         type='text'
@@ -22,7 +35,6 @@ export default function Search() {
           source={clear}
           altName='arrow'
           onClickHandler={() => {
-            console.log('Clear');
             setSearchValue('');
           }}
         />

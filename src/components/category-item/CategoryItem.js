@@ -24,7 +24,6 @@ function CategoryItem(props) {
               source={arrow}
               altName='arrow'
               onClickHandler={() => {
-                console.log('Open/close');
                 setIsOpen(!isOpen);
               }}
             />
