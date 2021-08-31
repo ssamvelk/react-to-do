@@ -12,6 +12,7 @@ import './Header.scss';
 function Header() {
   const dispatch = useDispatch();
   const _id = useSelector(selectActiveCategoryId);
+
   const addNewCategory = useCallback((value) => {
     dispatch(
       addCategory({
@@ -43,7 +44,7 @@ function Header() {
     <header className='header'>
       <div className='header__top'>
         <span className='header__logo'>To-Do List</span>
-        <Search></Search>
+        <Search />
       </div>
       <ProgressBar value={15} />
       <div className='header__add-buttons'>

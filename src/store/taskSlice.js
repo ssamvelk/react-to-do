@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { taskList } from '../constants/constants';
 
 const initialState = {
@@ -45,7 +45,12 @@ export const {
 } = taskSlice.actions;
 
 export const selectTasks = (state) => state.tasks;
+
 export const selectTasksList = (state) => state.tasks.taskList;
+// export const selectTasksById = createSelector(
+//   selectTasksList,
+//   (state) => state
+// );
 export const selectActiveTaskId = (state) => state.tasks.taskList.activeTaskId;
 export const selectShowOnlyDone = (state) => state.tasks.taskList.showOnlyDone;
 
