@@ -3,11 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '../../button/Button';
-import {
-  selectTasksById,
-  selectTasksList,
-  updateTaskById,
-} from '../../../store/taskSlice';
+import { selectTasksList, updateTaskById } from '../../../store/taskSlice';
+import { selectActiveCategoryId } from '../../../store/categorySlice';
 import Checkbox from '../../checkbox/Checkbox';
 
 import './TaskEdit.scss';
@@ -16,8 +13,9 @@ function TaskEdit(props) {
   const dispatch = useDispatch();
   let { id } = useParams();
   const task = useSelector(selectTasksList).find((item) => item.id === +id);
+  const activeCategoryId = useSelector(selectActiveCategoryId);
 
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(task.title);
   const [_isDone, setIsDone] = useState(task.isDone);
 
   // console.log('id/task', +id, task);
@@ -37,9 +35,9 @@ function TaskEdit(props) {
             onClickHandle={() =>
               editTask({
                 id: +id,
-                title: value,
+                title: value || task.title,
                 isDone: _isDone,
-                categoryId: task.categoryId,
+                categoryId: activeCategoryId,
               })
             }
           />
