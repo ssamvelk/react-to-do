@@ -9,7 +9,7 @@ import Checkbox from '../../checkbox/Checkbox';
 
 import './TaskEdit.scss';
 
-function TaskEdit(props) {
+function TaskEdit() {
   const dispatch = useDispatch();
   let { id } = useParams();
   const task = useSelector(selectTasksList).find((item) => item.id === +id);

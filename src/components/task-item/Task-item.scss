@@ -2,6 +2,9 @@
   height: 100px;
   display: flex;
   position: relative;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-bottom: 5px;
 
   &__checkbox {
     position: absolute;
@@ -12,6 +15,8 @@
   }
 
   &__title {
+    border: none;
+    border-radius: inherit;
     width: 100%;
     flex-grow: 1;
     padding: 0 60px;

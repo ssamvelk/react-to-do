@@ -1,21 +1,41 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
 import Checkbox from '../checkbox/Checkbox';
 import Icon from '../icon/Icon';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleShowOnlyDone, selectShowOnlyDone } from '../../store/taskSlice';
+import {
+  toggleShowOnlyDone,
+  setSearchValueAction,
+  selectShowOnlyDone,
+  selectSearchValue,
+} from '../../store/taskSlice';
 import clear from './clear.png';
+
 import './Search.scss';
 
 export default function Search() {
   const dispatch = useDispatch();
+  let location = useLocation();
+  let history = useHistory();
+
   const _showOnlyDone = useSelector(selectShowOnlyDone);
-  const [searchValue, setSearchValue] = useState('');
   const [showOnlyDone, setShowOnlyDone] = useState(_showOnlyDone);
 
-  const toggle = (_) => {
-    dispatch(toggleShowOnlyDone(!showOnlyDone));
-    setShowOnlyDone(_showOnlyDone);
-  };
+  const _searchValue = useSelector(selectSearchValue);
+  const [searchValue, setSearchValue] = useState(_searchValue);
+
+  const onChangeSearchValueHandler = useCallback((value) => {
+    dispatch(setSearchValueAction(value));
+    setSearchValue(value);
+    if (value) history.push({ ...location, search: `?search=${value}` });
+    else if (value === '') history.push({ ...location, search: null });
+  });
+
+  const toggle = useCallback((isChecked) => {
+    dispatch(toggleShowOnlyDone(isChecked));
+    setShowOnlyDone(isChecked);
+  });
 
   return (
     <div className='search'>
@@ -23,19 +43,19 @@ export default function Search() {
         isCheck={showOnlyDone}
         text='Show done'
         onClickHandler={toggle}
-      ></Checkbox>
+      />
       <input
         className='search__input'
         type='text'
         value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
-      ></input>
+        onChange={(e) => onChangeSearchValueHandler(e.target.value)}
+      />
       <span className='search__delete'>
         <Icon
           source={clear}
           altName='arrow'
           onClickHandler={() => {
-            setSearchValue('');
+            onChangeSearchValueHandler('');
           }}
         />
       </span>

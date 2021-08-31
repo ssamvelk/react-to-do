@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 import CategoryItem from '../category-item/CategoryItem';
 import {
   selectActiveCategoryId,
@@ -10,12 +10,14 @@ import {
 
 function CategoryList({ categories, isEditMode }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const _id = useSelector(selectActiveCategoryId);
 
   const [activeItem, setActiveItem] = useState(_id);
   const onClickHandler = (id) => {
     setActiveItem(id);
     dispatch(setActiveCategoryId(id));
+    history.push(`${id}`);
   };
 
   const changeActiveCategory = useCallback((arr) => {
@@ -34,6 +36,14 @@ function CategoryList({ categories, isEditMode }) {
     });
   });
 
+  const changeMode = useCallback((arr) => {
+    return arr.map((item) => ({
+      ...item,
+      isEditMode,
+      nestedItems: changeMode(item.nestedItems),
+    }));
+  });
+
   useEffect(() => {
     const _categories = changeActiveCategory(categories);
     dispatch(updateCategoryList(_categories));
@@ -46,14 +56,7 @@ function CategoryList({ categories, isEditMode }) {
           {...category}
           key={category.id}
           isEditMode={isEditMode}
-          nestedItems={
-            category.nestedItems.length > 0
-              ? category.nestedItems.map((el) => ({
-                  ...el,
-                  isEditMode,
-                }))
-              : category.nestedItems
-          }
+          nestedItems={changeMode(category.nestedItems)}
           onClickHandler={onClickHandler}
         />
       ))}

@@ -1,10 +1,11 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { taskList } from '../constants/constants';
 
 const initialState = {
   taskList: taskList,
   activeTaskId: null,
   showOnlyDone: false,
+  searchValue: '',
 };
 
 export const taskSlice = createSlice({
@@ -32,10 +33,14 @@ export const taskSlice = createSlice({
     toggleShowOnlyDone: (state, action) => {
       state.showOnlyDone = action.payload;
     },
+    setSearchValueAction: (state, action) => {
+      state.searchValue = action.payload;
+    },
   },
 });
 
 export const {
+  setSearchValueAction,
   toggleShowOnlyDone,
   addTask,
   deleteTask,
@@ -47,11 +52,8 @@ export const {
 export const selectTasks = (state) => state.tasks;
 
 export const selectTasksList = (state) => state.tasks.taskList;
-// export const selectTasksById = createSelector(
-//   selectTasksList,
-//   (state) => state
-// );
 export const selectActiveTaskId = (state) => state.tasks.taskList.activeTaskId;
-export const selectShowOnlyDone = (state) => state.tasks.taskList.showOnlyDone;
+export const selectShowOnlyDone = (state) => state.tasks.showOnlyDone;
+export const selectSearchValue = (state) => state.tasks.searchValue;
 
 export default taskSlice.reducer;

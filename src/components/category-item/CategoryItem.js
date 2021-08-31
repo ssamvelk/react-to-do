@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import Icon from '../icon/Icon';
 import PropTypes from 'prop-types';
 
-import './CategoryItem.scss';
 import undo from './img/undo.png';
 import del from './img/delete.png';
 import edit from './img/edit.png';
 import arrow from './img/arrow.png';
 import add from './img/add.png';
+import './CategoryItem.scss';
 
 function CategoryItem(props) {
   const [isOpen, setIsOpen] = useState(true);

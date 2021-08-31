@@ -1,22 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { selectTasksList } from '../../../store/taskSlice';
 
 import './TaskEditHeader.scss';
 
-function TaskEditHeader(props) {
+function TaskEditHeader() {
   let { id } = useParams();
-  return (
-    <span className='task-edit-header__logo'>{props.title + ' id: ' + id}</span>
+  const { title } = useSelector(selectTasksList).find(
+    (item) => item.id === +id
   );
+  return <span className='task-edit-header__logo'>{title}</span>;
 }
-
-TaskEditHeader.defaultProps = {
-  title: 'To-Do Item default title',
-};
-
-TaskEditHeader.propTypes = {
-  title: PropTypes.string,
-};
 
 export default TaskEditHeader;

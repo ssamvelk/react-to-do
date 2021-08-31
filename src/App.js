@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.scss';
 import ToDoListPage from './components/to-do-list-page/ToDoListPage';
 import TaskList from './components/task-list/TaskList';
-import { taskList, categoryList } from './constants/constants';
 import CategoryList from './components/category-list/CategoryList';
 import TaskEditPage from './components/task-edit-page/TaskEditPage';
 import TaskEdit from './components/task-edit-page/task-edit/TaskEdit';
