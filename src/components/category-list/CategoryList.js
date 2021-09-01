@@ -7,6 +7,7 @@ import {
   setActiveCategoryId,
   updateCategoryList,
 } from '../../store/categorySlice';
+import Backdrop from '../backdrop/Backdrop';
 
 function CategoryList({ categories, isEditMode }) {
   const dispatch = useDispatch();
@@ -60,6 +61,9 @@ function CategoryList({ categories, isEditMode }) {
           onClickHandler={onClickHandler}
         />
       ))}
+      <Backdrop>
+        <h1>Modal!!!!!!</h1>
+      </Backdrop>
     </div>
   );
 }
