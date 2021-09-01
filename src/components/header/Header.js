@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import AddButton from '../add-button/addButton';
 import ProgressBar from '../progress-bar/ProgressBar';
 import { addCategory } from '../../store/categorySlice';
-import { addTask } from '../../store/taskSlice';
+import { addTask, selectProgress } from '../../store/taskSlice';
 import Search from '../search/Search';
 import { selectActiveCategoryId } from '../../store/categorySlice';
 
@@ -12,6 +12,7 @@ import './Header.scss';
 function Header() {
   const dispatch = useDispatch();
   const _id = useSelector(selectActiveCategoryId);
+  const progress = useSelector(selectProgress);
 
   const addNewCategory = useCallback((value) => {
     dispatch(
@@ -46,7 +47,7 @@ function Header() {
         <span className='header__logo'>To-Do List</span>
         <Search />
       </div>
-      <ProgressBar value={15} />
+      <ProgressBar value={progress} />
       <div className='header__add-buttons'>
         <AddButton
           onClickHandler={addNewCategory}

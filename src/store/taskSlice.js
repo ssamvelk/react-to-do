@@ -6,6 +6,7 @@ const initialState = {
   activeTaskId: null,
   showOnlyDone: false,
   searchValue: '',
+  progress: 0,
 };
 
 export const taskSlice = createSlice({
@@ -36,10 +37,14 @@ export const taskSlice = createSlice({
     setSearchValueAction: (state, action) => {
       state.searchValue = action.payload;
     },
+    setProgress: (state, action) => {
+      state.progress = action.payload;
+    },
   },
 });
 
 export const {
+  setProgress,
   setSearchValueAction,
   toggleShowOnlyDone,
   addTask,
@@ -55,5 +60,6 @@ export const selectTasksList = (state) => state.tasks.taskList;
 export const selectActiveTaskId = (state) => state.tasks.taskList.activeTaskId;
 export const selectShowOnlyDone = (state) => state.tasks.showOnlyDone;
 export const selectSearchValue = (state) => state.tasks.searchValue;
+export const selectProgress = (state) => state.tasks.progress;
 
 export default taskSlice.reducer;
