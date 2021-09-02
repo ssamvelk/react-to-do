@@ -30,7 +30,6 @@ export default function ConfirmCategoryDeletion({ okHandler = null }) {
           text='Yes'
           onClickHandle={() => {
             okHandler();
-            // confirm();
           }}
         />
         <Button

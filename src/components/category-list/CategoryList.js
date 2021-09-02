@@ -9,9 +9,13 @@ import {
   selectIsPopupOpen,
   setActiveCategoryId,
   setIsPopupOpen,
+  updateCategoryItemById,
   updateCategoryList,
 } from '../../store/categorySlice';
-import { ConfirmCategoryDeletion, AddSubcategory } from '../popups';
+import { popupMode } from '../../constants/constants';
+
+import { ConfirmCategoryDeletion, AddSubcategoryPopup } from '../popups';
+import { findCategoryTitleById } from '../../utils';
 
 function CategoryList({ isEditMode }) {
   const dispatch = useDispatch();
@@ -63,6 +67,11 @@ function CategoryList({ isEditMode }) {
     dispatch(setIsPopupOpen(false));
   });
 
+  const editCategoryHandler = useCallback((id, value) => {
+    dispatch(updateCategoryItemById({ id, value })); // update Category
+    dispatch(setIsPopupOpen(false));
+  });
+
   useEffect(() => {
     const _categories = changeActiveCategory(categories2);
     dispatch(updateCategoryList(_categories));
@@ -80,9 +89,16 @@ function CategoryList({ isEditMode }) {
             onClickHandler={onClickHandler}
           />
         ))}
-      {/* <AddSubcategory /> */}
-      {isPopupOpen && (
+      {isPopupOpen === popupMode.DELETE_MODE && (
         <ConfirmCategoryDeletion okHandler={deleteCategoryHandler} />
+      )}
+      {isPopupOpen === popupMode.EDIT_MODE && (
+        <AddSubcategoryPopup
+          okHandler={(value) => {
+            editCategoryHandler(_id, value);
+          }}
+          oldTitle={findCategoryTitleById(categories2, _id)}
+        />
       )}
     </div>
   );

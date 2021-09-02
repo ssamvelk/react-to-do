@@ -10,6 +10,7 @@ import arrow from './img/arrow.png';
 import add from './img/add.png';
 import './CategoryItem.scss';
 import { selectIsPopupOpen, setIsPopupOpen } from '../../store/categorySlice';
+import { popupMode } from '../../constants/constants';
 
 function CategoryItem(props) {
   const dispatch = useDispatch();
@@ -45,10 +46,24 @@ function CategoryItem(props) {
             <Icon
               source={del}
               altName='delete'
-              onClickHandler={() => dispatch(setIsPopupOpen(true))}
+              onClickHandler={() =>
+                dispatch(setIsPopupOpen(popupMode.DELETE_MODE))
+              }
             />
-            <Icon source={edit} altName='edit' />
-            <Icon source={add} altName='add' />
+            <Icon
+              source={edit}
+              altName='edit'
+              onClickHandler={() =>
+                dispatch(setIsPopupOpen(popupMode.EDIT_MODE))
+              }
+            />
+            <Icon
+              source={add}
+              altName='add'
+              onClickHandler={() =>
+                dispatch(setIsPopupOpen(popupMode.ADD_SUBTASK_MODE))
+              }
+            />
           </p>
         )}
         {props.isEditMode && (
