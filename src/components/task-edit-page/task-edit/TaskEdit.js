@@ -8,7 +8,6 @@ import { selectActiveCategoryId } from '../../../store/categorySlice';
 import Checkbox from '../../checkbox/Checkbox';
 
 import './TaskEdit.scss';
-
 function TaskEdit() {
   const dispatch = useDispatch();
   let { id } = useParams();
@@ -17,8 +16,6 @@ function TaskEdit() {
 
   const [value, setValue] = useState(task.title);
   const [_isDone, setIsDone] = useState(task.isDone);
-
-  // console.log('id/task', +id, task);
 
   const editTask = useCallback(
     ({ id = +id, title = '111', isDone = false, categoryId = 111 }) => {
@@ -51,6 +48,7 @@ function TaskEdit() {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder='Task title'
+        autoFocus={true}
       />
       <div className='task-edit__done'>
         <Checkbox

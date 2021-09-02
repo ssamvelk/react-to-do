@@ -22,7 +22,6 @@ function TaskList({ tasks }) {
     (allTasks) => {
       const doneTasks = allTasks.reduce((acc, cur) => {
         if (cur.isDone) acc += 1;
-        // console.log('acc', acc);
         return acc;
       }, 0);
       const progress = (doneTasks * 100) / _tasks.length;

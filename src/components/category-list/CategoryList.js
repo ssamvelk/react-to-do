@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import CategoryItem from '../category-item/CategoryItem';
 import {
+  addSubcategoryItemById,
   deleteCategory,
   selectActiveCategoryId,
   selectCategoriesList,
@@ -72,6 +73,11 @@ function CategoryList({ isEditMode }) {
     dispatch(setIsPopupOpen(false));
   });
 
+  const addSubcategoryHandler = useCallback((id, subcategory) => {
+    dispatch(addSubcategoryItemById({ id, subcategory }));
+    dispatch(setIsPopupOpen(false));
+  });
+
   useEffect(() => {
     const _categories = changeActiveCategory(categories2);
     dispatch(updateCategoryList(_categories));
@@ -98,6 +104,14 @@ function CategoryList({ isEditMode }) {
             editCategoryHandler(_id, value);
           }}
           oldTitle={findCategoryTitleById(categories2, _id)}
+        />
+      )}
+      {isPopupOpen === popupMode.ADD_SUBTASK_MODE && (
+        <AddSubcategoryPopup
+          okHandler={(sub) => {
+            addSubcategoryHandler(_id, sub);
+          }}
+          oldTitle='Subcategory'
         />
       )}
     </div>

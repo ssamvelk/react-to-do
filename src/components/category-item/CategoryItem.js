@@ -14,7 +14,6 @@ import { popupMode } from '../../constants/constants';
 
 function CategoryItem(props) {
   const dispatch = useDispatch();
-  // const isPopupOpenState = useSelector(selectIsPopupOpen);
   const [isOpen, setIsOpen] = useState(true);
 
   return (

@@ -16,8 +16,6 @@ export default function AddSubcategoryPopup({
 }) {
   const dispatch = useDispatch();
   const mode = useSelector(selectIsPopupOpen);
-  console.log(mode);
-
   const [title, setTitle] = useState(oldTitle);
 
   return (
@@ -38,12 +36,22 @@ export default function AddSubcategoryPopup({
           }
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          autoFocus={true}
         />
         <div className='add-subcategory__controls'>
           <Button
             text='Add'
             onClickHandle={() => {
-              okHandler(title);
+              if (mode === popupMode.EDIT_MODE) okHandler(title);
+              if (mode === popupMode.ADD_SUBTASK_MODE)
+                okHandler({
+                  id: Date.now(),
+                  title: title,
+                  isNested: false,
+                  isEditMode: false,
+                  isActive: false,
+                  nestedItems: [],
+                });
             }}
           />
           <Button
