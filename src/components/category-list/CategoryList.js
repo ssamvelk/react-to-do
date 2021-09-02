@@ -3,16 +3,22 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import CategoryItem from '../category-item/CategoryItem';
 import {
+  deleteCategory,
   selectActiveCategoryId,
+  selectCategoriesList,
+  selectIsPopupOpen,
   setActiveCategoryId,
+  setIsPopupOpen,
   updateCategoryList,
 } from '../../store/categorySlice';
-import Backdrop from '../backdrop/Backdrop';
+import { ConfirmCategoryDeletion, AddSubcategory } from '../popups';
 
-function CategoryList({ categories, isEditMode }) {
+function CategoryList({ isEditMode }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const _id = useSelector(selectActiveCategoryId);
+  const isPopupOpen = useSelector(selectIsPopupOpen);
+  const categories2 = useSelector(selectCategoriesList);
 
   const [activeItem, setActiveItem] = useState(_id);
   const onClickHandler = (id) => {
@@ -38,32 +44,46 @@ function CategoryList({ categories, isEditMode }) {
   });
 
   const changeMode = useCallback((arr) => {
-    return arr.map((item) => ({
-      ...item,
-      isEditMode,
-      nestedItems: changeMode(item.nestedItems),
-    }));
+    if (arr) {
+      return arr.map((item) => ({
+        ...item,
+        isEditMode,
+        nestedItems: changeMode(item.nestedItems),
+      }));
+    }
+  }, categories2);
+
+  const deleteCategoryHandler = useCallback(() => {
+    dispatch(deleteCategory(activeItem));
+    if (categories2.length > 0) {
+      dispatch(setActiveCategoryId(categories2[0].id));
+    } else {
+      dispatch(setActiveCategoryId(null));
+    }
+    dispatch(setIsPopupOpen(false));
   });
 
   useEffect(() => {
-    const _categories = changeActiveCategory(categories);
+    const _categories = changeActiveCategory(categories2);
     dispatch(updateCategoryList(_categories));
-  }, [activeItem]);
+  }, [activeItem, _id]);
 
   return (
     <div>
-      {categories.map((category) => (
-        <CategoryItem
-          {...category}
-          key={category.id}
-          isEditMode={isEditMode}
-          nestedItems={changeMode(category.nestedItems)}
-          onClickHandler={onClickHandler}
-        />
-      ))}
-      <Backdrop>
-        <h1>Modal!!!!!!</h1>
-      </Backdrop>
+      {categories2 &&
+        categories2.map((category) => (
+          <CategoryItem
+            {...category}
+            key={category.id}
+            isEditMode={isEditMode}
+            nestedItems={changeMode(category.nestedItems)}
+            onClickHandler={onClickHandler}
+          />
+        ))}
+      {/* <AddSubcategory /> */}
+      {isPopupOpen && (
+        <ConfirmCategoryDeletion okHandler={deleteCategoryHandler} />
+      )}
     </div>
   );
 }

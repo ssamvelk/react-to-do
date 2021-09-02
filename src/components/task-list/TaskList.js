@@ -39,17 +39,19 @@ function TaskList({ tasks }) {
 
   return (
     <div className='task-list'>
-      {_tasks.length > 0
-        ? _tasks.map((task) => (
-            <TaskItem
-              key={task.id}
-              id={task.id}
-              isDone={task.isDone}
-              title={task.title}
-              categoryId={task.categoryId}
-            />
-          ))
-        : null}
+      {_tasks.length > 0 ? (
+        _tasks.map((task) => (
+          <TaskItem
+            key={task.id}
+            id={task.id}
+            isDone={task.isDone}
+            title={task.title}
+            categoryId={task.categoryId}
+          />
+        ))
+      ) : (
+        <h3 className='joke'>Add some tasks Bro! 😎</h3>
+      )}
     </div>
   );
 }

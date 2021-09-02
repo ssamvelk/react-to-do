@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Icon from '../icon/Icon';
 import PropTypes from 'prop-types';
 
@@ -8,8 +9,11 @@ import edit from './img/edit.png';
 import arrow from './img/arrow.png';
 import add from './img/add.png';
 import './CategoryItem.scss';
+import { selectIsPopupOpen, setIsPopupOpen } from '../../store/categorySlice';
 
 function CategoryItem(props) {
+  const dispatch = useDispatch();
+  // const isPopupOpenState = useSelector(selectIsPopupOpen);
   const [isOpen, setIsOpen] = useState(true);
 
   return (
@@ -38,7 +42,11 @@ function CategoryItem(props) {
 
         {!props.isEditMode && (
           <p className='category__controls'>
-            <Icon source={del} altName='delete' />
+            <Icon
+              source={del}
+              altName='delete'
+              onClickHandler={() => dispatch(setIsPopupOpen(true))}
+            />
             <Icon source={edit} altName='edit' />
             <Icon source={add} altName='add' />
           </p>

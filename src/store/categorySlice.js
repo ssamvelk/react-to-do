@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { categoryList } from '../constants/constants';
+import deleteCategoryById from '../utils/deleteCategoryById';
 
 const initialState = {
   categoryList: categoryList,
   activeCategoryId: 0,
+  isPopupOpen: false,
 };
 
 export const categorySlice = createSlice({
@@ -15,8 +17,9 @@ export const categorySlice = createSlice({
       state.categoryList = [action.payload, ...state.categoryList];
     },
     deleteCategory: (state, action) => {
-      state.categoryList = state.categoryList.filter(
-        (item) => item.id !== action.id
+      state.categoryList = deleteCategoryById(
+        state.categoryList,
+        action.payload
       );
     },
     updateCategoryList: (state, action) => {
@@ -25,10 +28,14 @@ export const categorySlice = createSlice({
     setActiveCategoryId: (state, action) => {
       state.activeCategoryId = action.payload;
     },
+    setIsPopupOpen: (state, action) => {
+      state.isPopupOpen = action.payload;
+    },
   },
 });
 
 export const {
+  setIsPopupOpen,
   addCategory,
   deleteCategory,
   setActiveCategoryId,
@@ -39,5 +46,6 @@ export const selectCategories = (state) => state.categories;
 export const selectCategoriesList = (state) => state.categories.categoryList;
 export const selectActiveCategoryId = (state) =>
   state.categories.activeCategoryId;
+export const selectIsPopupOpen = (state) => state.categories.isPopupOpen;
 
 export default categorySlice.reducer;
