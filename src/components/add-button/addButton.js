@@ -2,11 +2,17 @@ import React, { useState } from 'react';
 
 import './addButton.scss';
 
-export default function AddButton({ placeholder, onClickHandler }) {
+export default function AddButton({
+  placeholder,
+  onClickHandler,
+  additionalClass = '',
+}) {
   const [value, setValue] = useState('');
 
   return (
-    <div className='add-button'>
+    <div
+      className={`add-button${additionalClass ? ` ${additionalClass}` : ''}`}
+    >
       <input
         value={value}
         onChange={(e) => setValue(e.target.value)}

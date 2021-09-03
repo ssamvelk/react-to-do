@@ -21,6 +21,7 @@ function CategoryItem(props) {
             <Icon
               type='arrow'
               altName='arrow'
+              notPropagate={true}
               onClickHandler={() => {
                 setIsOpen(!isOpen);
               }}

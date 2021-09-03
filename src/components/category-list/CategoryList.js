@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import CategoryItem from '../category-item/CategoryItem';
 import {
+  addCategory,
   addSubcategoryItemById,
   deleteCategory,
   selectActiveCategoryId,
@@ -17,6 +18,9 @@ import { popupMode } from '../../constants/constants';
 
 import { ConfirmCategoryDeletion, AddSubcategoryPopup } from '../popups';
 import { findCategoryTitleById } from '../../utils';
+import AddButton from '../add-button/addButton';
+
+import './CategoryList.scss';
 
 function CategoryList({ isEditMode }) {
   const dispatch = useDispatch();
@@ -46,6 +50,19 @@ function CategoryList({ isEditMode }) {
         nestedItems: changeActiveCategory(item.nestedItems),
       };
     });
+  });
+
+  const addNewCategory = useCallback((value) => {
+    dispatch(
+      addCategory({
+        id: Date.now(),
+        title: value,
+        isActive: false,
+        isEditMode: false,
+        isNested: false,
+        nestedItems: [],
+      })
+    );
   });
 
   const changeMode = useCallback((arr) => {
@@ -84,7 +101,12 @@ function CategoryList({ isEditMode }) {
   }, [activeItem, _id]);
 
   return (
-    <div>
+    <div className='category-list'>
+      <AddButton
+        additionalClass='category-list__add-button'
+        onClickHandler={addNewCategory}
+        placeholder='Enter category title'
+      />
       {categories2 &&
         categories2.map((category) => (
           <CategoryItem

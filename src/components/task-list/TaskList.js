@@ -6,17 +6,21 @@ import TaskItem from '../task-item/Task-item';
 
 import './TaskList.scss';
 import {
+  addTask,
   selectSearchValue,
   selectShowOnlyDone,
   setProgress,
 } from '../../store/taskSlice';
+import AddButton from '../add-button/addButton';
 
 function TaskList({ tasks }) {
   const dispatch = useDispatch();
-  const _id = useSelector(selectActiveCategoryId);
-  let _tasks = tasks.filter((item) => item.categoryId === _id);
+  const activeCategoryId = useSelector(selectActiveCategoryId);
+
   const taskFilter = useSelector(selectSearchValue);
   const showOnlyDone = useSelector(selectShowOnlyDone);
+
+  let _tasks = tasks.filter((item) => item.categoryId === activeCategoryId);
 
   const calculateProgress = useCallback(
     (allTasks) => {
@@ -30,6 +34,20 @@ function TaskList({ tasks }) {
     [_tasks]
   );
 
+  const addNewTask = useCallback(
+    (value) => {
+      dispatch(
+        addTask({
+          id: Date.now(),
+          title: value,
+          isDone: false,
+          categoryId: activeCategoryId,
+        })
+      );
+    },
+    [activeCategoryId]
+  );
+
   if (taskFilter)
     _tasks = _tasks.filter((task) => task.title.includes(taskFilter));
   if (showOnlyDone) _tasks = _tasks.filter((task) => task.isDone === true);
@@ -38,6 +56,11 @@ function TaskList({ tasks }) {
 
   return (
     <div className='task-list'>
+      <AddButton
+        additionalClass='task-list__add-button'
+        onClickHandler={addNewTask}
+        placeholder='Enter new To-Do'
+      />
       {_tasks.length > 0 ? (
         _tasks.map((task) => (
           <TaskItem
