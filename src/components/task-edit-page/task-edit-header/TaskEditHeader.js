@@ -7,10 +7,21 @@ import './TaskEditHeader.scss';
 
 function TaskEditHeader() {
   let { id } = useParams();
-  const { title } = useSelector(selectTasksList).find(
+  const { title, isDone } = useSelector(selectTasksList).find(
     (item) => item.id === +id
   );
-  return <span className='task-edit-header__logo'>{title}</span>;
+
+  return (
+    <span
+      className={
+        isDone
+          ? 'task-edit-header__logo task-edit-header__logo_done'
+          : 'task-edit-header__logo'
+      }
+    >
+      {title}
+    </span>
+  );
 }
 
 export default TaskEditHeader;

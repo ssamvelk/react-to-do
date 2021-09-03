@@ -1,7 +1,11 @@
 .task-edit-header__logo {
   display: block;
-  line-height: 56px;
   font-size: 26px;
   font-weight: 700;
-  margin-bottom: 30px;
+  margin-right: 20px;
+  color: #5896fb;
+
+  &_done {
+    text-decoration: line-through;
+  }
 }
