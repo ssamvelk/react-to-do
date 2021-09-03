@@ -10,7 +10,6 @@ import {
   selectShowOnlyDone,
   selectSearchValue,
 } from '../../store/taskSlice';
-import clear from './clear.png';
 
 import './Search.scss';
 
@@ -52,7 +51,7 @@ export default function Search() {
       />
       <span className='search__delete'>
         <Icon
-          source={clear}
+          type='clear'
           altName='arrow'
           onClickHandler={() => {
             onChangeSearchValueHandler('');

@@ -2,15 +2,9 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from '../icon/Icon';
 import PropTypes from 'prop-types';
-
-import undo from './img/undo.png';
-import del from './img/delete.png';
-import edit from './img/edit.png';
-import arrow from './img/arrow.png';
-import add from './img/add.png';
-import './CategoryItem.scss';
 import { selectIsPopupOpen, setIsPopupOpen } from '../../store/categorySlice';
 import { popupMode } from '../../constants/constants';
+import './CategoryItem.scss';
 
 function CategoryItem(props) {
   const dispatch = useDispatch();
@@ -25,7 +19,7 @@ function CategoryItem(props) {
         {!props.isEditMode && props.isNested && (
           <div className='category__arrow'>
             <Icon
-              source={arrow}
+              type='arrow'
               altName='arrow'
               onClickHandler={() => {
                 setIsOpen(!isOpen);
@@ -38,26 +32,27 @@ function CategoryItem(props) {
           className='category__title'
           value={props.title || 'Category #'}
           onChange={() => console.log('CategoryItem')}
+          readOnly={true}
         />
 
         {!props.isEditMode && (
           <p className='category__controls'>
             <Icon
-              source={del}
+              type='delete'
               altName='delete'
               onClickHandler={() =>
                 dispatch(setIsPopupOpen(popupMode.DELETE_MODE))
               }
             />
             <Icon
-              source={edit}
+              type='edit'
               altName='edit'
               onClickHandler={() =>
                 dispatch(setIsPopupOpen(popupMode.EDIT_MODE))
               }
             />
             <Icon
-              source={add}
+              type='add'
               altName='add'
               onClickHandler={() =>
                 dispatch(setIsPopupOpen(popupMode.ADD_SUBTASK_MODE))
@@ -66,13 +61,13 @@ function CategoryItem(props) {
           </p>
         )}
         {props.isEditMode && (
-          <img
-            src={undo}
-            className='category__undo'
-            alt='undo'
-            width='20px'
-            height='20px'
-          />
+          <div className='category__undo'>
+            <Icon
+              type='undo'
+              altName='undo'
+              // onClickHandler={}
+            />
+          </div>
         )}
       </div>
       {props.isNested && props.nestedItems && isOpen && (

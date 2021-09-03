@@ -42,8 +42,10 @@ export default function AddSubcategoryPopup({
           <Button
             text='Add'
             onClickHandle={() => {
-              if (mode === popupMode.EDIT_MODE) okHandler(title);
-              if (mode === popupMode.ADD_SUBTASK_MODE)
+              if (mode === popupMode.EDIT_MODE) {
+                okHandler(title);
+              }
+              if (mode === popupMode.ADD_SUBTASK_MODE) {
                 okHandler({
                   id: Date.now(),
                   title: title,
@@ -52,6 +54,7 @@ export default function AddSubcategoryPopup({
                   isActive: false,
                   nestedItems: [],
                 });
+              }
             }}
           />
           <Button

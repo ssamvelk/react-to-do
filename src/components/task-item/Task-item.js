@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Checkbox from '../checkbox/Checkbox';
 import Icon from '../icon/Icon';
 import PropTypes from 'prop-types';
-import edit from './edit.png';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { updateTaskById } from '../../store/taskSlice';
@@ -30,7 +29,7 @@ function TaskItem(props) {
       <span className='task-item__edit'>
         <Link to={`/task/${props.id}`}>
           <Icon
-            source={edit}
+            type={'edit'}
             altName='edit'
             onClickHandler={() => null}
             isPropagate={true}

@@ -1,19 +1,27 @@
 import React from 'react';
 
-export default function Icon(props) {
+export default function Icon({
+  type,
+  onClickHandler,
+  notPropagate = false,
+  additionalClass = 'icon',
+  altName = 'image',
+}) {
   return (
     <img
-      src={props.source}
-      className={props.additionalClass || 'icon'}
-      alt={props.altName || 'image'}
+      src={`/img/${type}.png`}
+      className={additionalClass}
+      alt={altName}
       width='20px'
       height='20px'
       onClick={(e) => {
-        if (props.isPropagate === undefined || props.isPropagate === false) {
+        if (notPropagate) {
           e.preventDefault();
           e.stopPropagation();
         }
-        if (props.onClickHandler) props.onClickHandler();
+        if (onClickHandler) {
+          onClickHandler();
+        }
       }}
     />
   );
