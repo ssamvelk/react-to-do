@@ -1,37 +1,44 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectActiveCategoryId } from '../../store/categorySlice';
 import TaskItem from '../task-item/Task-item';
-
-import './TaskList.scss';
+import AddItem from '../add-item/AddItem';
 import {
   addTask,
   selectSearchValue,
   selectShowOnlyDone,
+  selectTasksList,
   setProgress,
 } from '../../store/taskSlice';
-import AddButton from '../add-button/addButton';
 
-function TaskList({ tasks }) {
+import './TaskList.scss';
+
+function TaskList() {
   const dispatch = useDispatch();
+  const tasks = useSelector(selectTasksList);
   const activeCategoryId = useSelector(selectActiveCategoryId);
-
   const taskFilter = useSelector(selectSearchValue);
   const showOnlyDone = useSelector(selectShowOnlyDone);
 
-  let _tasks = tasks.filter((item) => item.categoryId === activeCategoryId);
+  let currentTasks = tasks.filter(
+    (item) => item.categoryId === activeCategoryId
+  );
 
   const calculateProgress = useCallback(
     (allTasks) => {
-      const doneTasks = allTasks.reduce((acc, cur) => {
-        if (cur.isDone) acc += 1;
-        return acc;
-      }, 0);
-      const progress = (doneTasks * 100) / _tasks.length;
-      dispatch(setProgress(progress));
+      if (!allTasks) {
+        dispatch(setProgress(0));
+      } else {
+        const doneTasks = allTasks.reduce((acc, cur) => {
+          if (cur.isDone) acc += 1;
+          return acc;
+        }, 0);
+        const progress = (doneTasks * 100) / currentTasks.length;
+        dispatch(setProgress(progress));
+      }
     },
-    [_tasks]
+    [currentTasks]
   );
 
   const addNewTask = useCallback(
@@ -49,20 +56,25 @@ function TaskList({ tasks }) {
   );
 
   if (taskFilter)
-    _tasks = _tasks.filter((task) => task.title.includes(taskFilter));
-  if (showOnlyDone) _tasks = _tasks.filter((task) => task.isDone === true);
+    currentTasks = currentTasks.filter((task) =>
+      task.title.includes(taskFilter)
+    );
+  if (showOnlyDone)
+    currentTasks = currentTasks.filter((task) => task.isDone === true);
 
-  calculateProgress(_tasks);
+  useEffect(() => {
+    calculateProgress(currentTasks);
+  }, [currentTasks]);
 
   return (
     <div className='task-list'>
-      <AddButton
+      <AddItem
         additionalClass='task-list__add-button'
         onClickHandler={addNewTask}
         placeholder='Enter new To-Do'
       />
-      {_tasks.length > 0 ? (
-        _tasks.map((task) => (
+      {currentTasks.length > 0 ? (
+        currentTasks.map((task) => (
           <TaskItem
             key={task.id}
             id={task.id}

@@ -1,3 +1,6 @@
+@import '../../scss/colors.scss';
+@import '../../scss/mixins.scss';
+
 .button {
   min-width: 100px;
   height: 40px;
@@ -5,18 +8,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
-  border-radius: 5px;
   font-size: 20px;
   text-transform: uppercase;
   cursor: pointer;
   margin-left: 5px;
+  @include border();
 
   &:hover {
-    background-color: rgb(93, 147, 248);
-    border: 1px solid black;
-    border-radius: 5px;
-    appearance: none;
-    outline: none;
+    background-color: $blue;
+    @include border();
   }
 }

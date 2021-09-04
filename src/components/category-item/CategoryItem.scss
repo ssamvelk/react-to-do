@@ -1,28 +1,28 @@
-@mixin interactive() {
-}
+@import '../../scss/colors.scss';
+@import '../../scss/mixins.scss';
 
 .category {
   position: relative;
 
   &_active {
     & > .category__main {
-      background-color: rgb(208, 247, 240);
+      background-color: $blueLight;
     }
   }
 
   &__main {
-    border: 1px solid;
-    border-radius: 5px;
     background-color: white;
     padding: 0;
     padding-left: 40px;
     margin: 0;
+    margin-top: 2px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
     height: 40px;
     font-size: 20px;
+    @include border();
   }
 
   &__children {
@@ -35,7 +35,7 @@
     border: none;
     appearance: none;
     outline: none;
-    max-width: 300px;
+    width: 100%;
     font-size: 20px;
     background-color: inherit;
     cursor: default;
@@ -63,7 +63,8 @@
   }
 
   &__controls {
-    min-width: 80px;
+    padding-left: 20px;
+    min-width: 100px;
     display: flex;
     justify-content: space-between;
     margin-right: 5px;

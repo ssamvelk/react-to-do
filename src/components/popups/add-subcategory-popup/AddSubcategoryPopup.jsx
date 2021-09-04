@@ -49,12 +49,10 @@ export default function AddSubcategoryPopup({
                 okHandler({
                   id: Date.now(),
                   title: title,
-                  isNested: false,
-                  isEditMode: false,
-                  isActive: false,
                   nestedItems: [],
                 });
               }
+              () => dispatch(setIsPopupOpen(false));
             }}
           />
           <Button

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setIsPopupOpen } from '../../../store/categorySlice';
 import Button from '../../button/Button';
 import BasePopup from '../base-popup/BasePopup';

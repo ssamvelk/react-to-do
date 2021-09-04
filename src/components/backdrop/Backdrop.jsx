@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './Backdrop.scss';
 
 const Backdrop = ({ children, additionalClassName = '' }) => (

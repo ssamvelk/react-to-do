@@ -1,22 +1,30 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import Icon from '../icon/Icon';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { selectIsPopupOpen, setIsPopupOpen } from '../../store/categorySlice';
+import Icon from '../icon/Icon';
+import {
+  selectActiveCategoryId,
+  selectIsEditMode,
+  setIsPopupOpen,
+} from '../../store/categorySlice';
 import { popupMode } from '../../constants/constants';
+
 import './CategoryItem.scss';
 
-function CategoryItem(props) {
+function CategoryItem({ id, title, onClickHandler, nestedItems }) {
   const dispatch = useDispatch();
+  const activeCategoryIdState = useSelector(selectActiveCategoryId);
+  const isEditModeState = useSelector(selectIsEditMode);
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className={`category${props.isActive && ' category_active'}`}>
-      <div
-        className='category__main'
-        onClick={() => props.onClickHandler(props.id)}
-      >
-        {!props.isEditMode && props.isNested && (
+    <div
+      className={`category${
+        activeCategoryIdState === id && ' category_active'
+      }`}
+    >
+      <div className='category__main' onClick={() => onClickHandler(id)}>
+        {!isEditModeState && nestedItems.length > 0 && (
           <div className='category__arrow'>
             <Icon
               type='arrow'
@@ -31,12 +39,11 @@ function CategoryItem(props) {
 
         <input
           className='category__title'
-          value={props.title || 'Category #'}
-          onChange={() => console.log('CategoryItem')}
+          value={title || `Category ${id}`}
           readOnly={true}
         />
 
-        {!props.isEditMode && (
+        {!isEditModeState && (
           <p className='category__controls'>
             <Icon
               type='delete'
@@ -61,7 +68,8 @@ function CategoryItem(props) {
             />
           </p>
         )}
-        {props.isEditMode && (
+
+        {isEditModeState && (
           <div className='category__undo'>
             <Icon
               type='undo'
@@ -71,18 +79,16 @@ function CategoryItem(props) {
           </div>
         )}
       </div>
-      {props.isNested && props.nestedItems && isOpen && (
+
+      {nestedItems.length > 0 && isOpen && (
         <div className='category__children'>
-          {props.nestedItems.map((item) => (
+          {nestedItems.map((item) => (
             <CategoryItem
               id={item.id}
               key={item.id}
-              isActive={item.isActive}
-              isEditMode={item.isEditMode}
-              isNested={item.isNested}
               nestedItems={item.nestedItems}
               title={item.title}
-              onClickHandler={props.onClickHandler}
+              onClickHandler={onClickHandler}
             />
           ))}
         </div>
@@ -92,29 +98,20 @@ function CategoryItem(props) {
 }
 
 CategoryItem.defaultProps = {
-  // id: Date.now(),
-  isActive: false,
   title: 'title',
-  tasks: [],
-  isEditMode: false,
-  isNested: false,
   nestedItems: [],
 };
 
 CategoryItem.propTypes = {
   id: PropTypes.number,
-  isActive: PropTypes.bool,
   title: PropTypes.string,
-  isEditMode: PropTypes.bool,
-  tasks: PropTypes.arrayOf(
+  nestedItems: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
       title: PropTypes.string,
       isDone: PropTypes.bool,
     })
   ),
-  isNested: PropTypes.bool,
-  nestedItems: PropTypes.array,
   onClickHandler: PropTypes.func,
 };
 

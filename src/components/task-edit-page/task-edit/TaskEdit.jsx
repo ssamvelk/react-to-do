@@ -1,13 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
 import Button from '../../button/Button';
 import { selectTasksList, updateTaskById } from '../../../store/taskSlice';
 import { selectActiveCategoryId } from '../../../store/categorySlice';
 import Checkbox from '../../checkbox/Checkbox';
 
 import './TaskEdit.scss';
+
 function TaskEdit() {
   const dispatch = useDispatch();
   let { id } = useParams();
@@ -15,10 +15,10 @@ function TaskEdit() {
   const activeCategoryId = useSelector(selectActiveCategoryId);
 
   const [value, setValue] = useState(task.title);
-  const [_isDone, setIsDone] = useState(task.isDone);
+  const [isDone, setIsDone] = useState(task.isDone);
 
   const editTask = useCallback(
-    ({ id = +id, title = '111', isDone = false, categoryId = 111 }) => {
+    ({ id = +id, title = '', isDone = false, categoryId = 111 }) => {
       dispatch(updateTaskById({ id, title, isDone, categoryId }));
     }
   );
@@ -33,14 +33,14 @@ function TaskEdit() {
               editTask({
                 id: +id,
                 title: value || task.title,
-                isDone: _isDone,
+                isDone: isDone,
                 categoryId: activeCategoryId,
               })
             }
           />
         </Link>
         <Link to='/' className='task-edit__link'>
-          <Button text='Cancel' onClickHandle={() => console.log('Cancel')} />
+          <Button text='Cancel' onClickHandle={null} />
         </Link>
       </div>
       <input
@@ -52,19 +52,17 @@ function TaskEdit() {
       />
       <div className='task-edit__done'>
         <Checkbox
-          isCheck={_isDone}
+          isCheck={isDone}
           onClickHandler={setIsDone}
           text='Done'
         ></Checkbox>
       </div>
       <textarea
         className='task-edit__description'
-        placeholder='Desription'
+        placeholder='Description'
       ></textarea>
     </div>
   );
 }
-
-TaskEdit.propTypes = {};
 
 export default TaskEdit;

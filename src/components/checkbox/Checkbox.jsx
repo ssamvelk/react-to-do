@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 
 import './Checkbox.scss';
 
-function Checkbox(props) {
+function Checkbox({ text, isCheck, onClickHandler }) {
   return (
     <div className='checkbox'>
       <input
         className='checkbox__control'
         type='checkbox'
-        checked={props.isCheck}
+        checked={isCheck}
         onChange={(e) => {
-          props.onClickHandler(e.target.checked);
+          onClickHandler(e.target.checked);
         }}
       />
-      {props.text ? <span className='checkbox__text'>{props.text}</span> : null}
+      {text ? <span className='checkbox__text'>{text}</span> : null}
     </div>
   );
 }

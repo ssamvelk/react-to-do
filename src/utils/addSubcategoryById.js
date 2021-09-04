@@ -4,7 +4,6 @@ export default function addSubcategoryById(arr, id, subcategory) {
       return {
         ...item,
         nestedItems: [subcategory, ...item.nestedItems],
-        isNested: true,
       };
     } else
       return {

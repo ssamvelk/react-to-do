@@ -1,8 +1,9 @@
+@import '../../scss/colors.scss';
+
 .main-container {
-  max-width: 1280px;
+  max-width: $Xl;
   margin: 0 auto;
   height: 100vh;
-  // background-color: bisque;
   display: flex;
   flex-direction: column;
 
@@ -14,15 +15,14 @@
     height: fit-content;
     align-self: stretch;
     flex-grow: 1;
+    padding-bottom: 20px;
   }
 
   &__left {
     width: 40%;
-    // background-color: burlywood;
   }
 
   &__right {
     width: 60%;
-    // background-color: beige;
   }
 }

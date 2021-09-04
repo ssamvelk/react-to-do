@@ -1,0 +1,6 @@
+@mixin border($radius: 5px) {
+  appearance: none;
+  outline: none;
+  border-radius: $radius;
+  border: 1px solid black;
+}

@@ -1,10 +1,11 @@
+@import '../../scss/mixins.scss';
+
 .task-item {
   height: 100px;
   display: flex;
   position: relative;
-  border: 1px solid black;
-  border-radius: 10px;
   margin-bottom: 5px;
+  @include border(20px);
 
   &__checkbox {
     position: absolute;
@@ -21,6 +22,7 @@
     flex-grow: 1;
     padding: 0 60px;
     font-size: 26px;
+
     &_done {
       text-decoration: line-through;
     }
@@ -33,6 +35,12 @@
     top: 38px;
     cursor: pointer;
     transition: 0.3s all;
+
+    .icon {
+      width: 30px;
+      height: 30px;
+    }
+
     &:hover {
       transform: scale(1.05);
     }

@@ -1,9 +1,11 @@
+@import '../../../scss/colors.scss';
+
 .task-edit-header__logo {
   display: block;
   font-size: 26px;
   font-weight: 700;
   margin-right: 20px;
-  color: #5896fb;
+  color: $logoColor;
 
   &_done {
     text-decoration: line-through;

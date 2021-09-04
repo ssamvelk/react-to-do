@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import Button from '../button/Button';
 
-import './addButton.scss';
+import './AddItem.scss';
 
-export default function AddButton({
+export default function AddItem({
   placeholder,
   onClickHandler,
   additionalClass = '',
@@ -10,13 +11,11 @@ export default function AddButton({
   const [value, setValue] = useState('');
 
   return (
-    <div
-      className={`add-button${additionalClass ? ` ${additionalClass}` : ''}`}
-    >
+    <div className={`add-item${additionalClass ? ` ${additionalClass}` : ''}`}>
       <input
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        className='add-button__input'
+        className='add-item__input'
         placeholder={placeholder || 'add placeholder'}
         onKeyPress={(e) => {
           if (e.key === 'Enter' && onClickHandler) {
@@ -25,19 +24,15 @@ export default function AddButton({
           }
         }}
       />
-      <button
-        className='add-button__button'
-        onClick={
-          onClickHandler
-            ? () => {
-                onClickHandler(value);
-                setValue('');
-              }
-            : () => console.log('clickHandler')
-        }
-      >
-        Add
-      </button>
+      <div className='add-item__button'>
+        <Button
+          text='Add'
+          onClickHandle={() => {
+            onClickHandler(value);
+            setValue('');
+          }}
+        />
+      </div>
     </div>
   );
 }

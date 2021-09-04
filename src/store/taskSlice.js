@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { taskList } from '../constants/constants';
+import { tasks as taskList } from '../__mock__/tasks';
 
 const initialState = {
   taskList: taskList,

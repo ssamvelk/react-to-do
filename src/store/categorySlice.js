@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { categoryList } from '../constants/constants';
+import { categories as categoryList } from '../__mock__/categories';
 import {
   deleteCategoryById,
   editCategoryById,
@@ -10,6 +10,7 @@ const initialState = {
   categoryList: categoryList,
   activeCategoryId: 0,
   isPopupOpen: false,
+  isEditMode: false,
 };
 
 export const categorySlice = createSlice({
@@ -17,7 +18,6 @@ export const categorySlice = createSlice({
   initialState,
   reducers: {
     addCategory: (state, action) => {
-      // state.categoryList.unshift(action.payload); // тут можно мутировать)
       state.categoryList = [action.payload, ...state.categoryList];
     },
     deleteCategory: (state, action) => {
@@ -49,10 +49,14 @@ export const categorySlice = createSlice({
     setIsPopupOpen: (state, action) => {
       state.isPopupOpen = action.payload;
     },
+    setIsEditMode: (state, action) => {
+      state.isEditMode = action.payload;
+    },
   },
 });
 
 export const {
+  setIsEditMode,
   addSubcategoryItemById,
   updateCategoryItemById,
   setIsPopupOpen,
@@ -67,5 +71,6 @@ export const selectCategoriesList = (state) => state.categories.categoryList;
 export const selectActiveCategoryId = (state) =>
   state.categories.activeCategoryId;
 export const selectIsPopupOpen = (state) => state.categories.isPopupOpen;
+export const selectIsEditMode = (state) => state.categories.isEditMode;
 
 export default categorySlice.reducer;
