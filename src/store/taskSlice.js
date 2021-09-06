@@ -1,13 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { tasks as taskList } from '../__mock__/tasks';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { URL } from '../constants/constants';
+import { HttpService } from '../services/Http.service';
 
 const initialState = {
-  taskList: taskList,
+  taskList: [],
   activeTaskId: null,
   showOnlyDone: false,
   searchValue: '',
   progress: 0,
 };
+
+export const fetchTasksAsync = createAsyncThunk(
+  'tasks/fetchTasks',
+  async () => {
+    return HttpService.get(URL.TASKS);
+  }
+);
 
 export const taskSlice = createSlice({
   name: 'tasks',
@@ -40,6 +48,11 @@ export const taskSlice = createSlice({
     setProgress: (state, action) => {
       state.progress = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchTasksAsync.fulfilled, (state, action) => {
+      state.taskList = [...action.payload];
+    });
   },
 });
 

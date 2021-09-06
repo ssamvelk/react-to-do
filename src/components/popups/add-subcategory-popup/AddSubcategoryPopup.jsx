@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { popupMode } from '../../../constants/constants';
+import { POPUP_MODE } from '../../../constants/constants';
 import {
   selectIsPopupOpen,
   setIsPopupOpen,
@@ -21,7 +21,7 @@ export default function AddSubcategoryPopup({
   return (
     <BasePopup
       title={
-        mode === popupMode.EDIT_MODE
+        mode === POPUP_MODE.EDIT_MODE
           ? `Edit "${oldTitle}" category.`
           : 'Add new subcategory.'
       }
@@ -30,7 +30,7 @@ export default function AddSubcategoryPopup({
         <input
           className='add-subcategory__title'
           placeholder={
-            mode === popupMode.EDIT_MODE
+            mode === POPUP_MODE.EDIT_MODE
               ? 'Edit category title'
               : 'Enter subcategory title'
           }
@@ -42,10 +42,10 @@ export default function AddSubcategoryPopup({
           <Button
             text='Add'
             onClickHandle={() => {
-              if (mode === popupMode.EDIT_MODE) {
+              if (mode === POPUP_MODE.EDIT_MODE) {
                 okHandler(title);
               }
-              if (mode === popupMode.ADD_SUBTASK_MODE) {
+              if (mode === POPUP_MODE.ADD_SUBTASK_MODE) {
                 okHandler({
                   id: Date.now(),
                   title: title,

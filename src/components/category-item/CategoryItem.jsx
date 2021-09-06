@@ -7,7 +7,7 @@ import {
   selectIsEditMode,
   setIsPopupOpen,
 } from '../../store/categorySlice';
-import { popupMode } from '../../constants/constants';
+import { POPUP_MODE } from '../../constants/constants';
 
 import './CategoryItem.scss';
 
@@ -49,21 +49,21 @@ function CategoryItem({ id, title, onClickHandler, nestedItems }) {
               type='delete'
               altName='delete'
               onClickHandler={() =>
-                dispatch(setIsPopupOpen(popupMode.DELETE_MODE))
+                dispatch(setIsPopupOpen(POPUP_MODE.DELETE_MODE))
               }
             />
             <Icon
               type='edit'
               altName='edit'
               onClickHandler={() =>
-                dispatch(setIsPopupOpen(popupMode.EDIT_MODE))
+                dispatch(setIsPopupOpen(POPUP_MODE.EDIT_MODE))
               }
             />
             <Icon
               type='add'
               altName='add'
               onClickHandler={() =>
-                dispatch(setIsPopupOpen(popupMode.ADD_SUBTASK_MODE))
+                dispatch(setIsPopupOpen(POPUP_MODE.ADD_SUBTASK_MODE))
               }
             />
           </p>

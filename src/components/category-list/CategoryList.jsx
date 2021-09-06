@@ -13,7 +13,7 @@ import {
   setIsPopupOpen,
   updateCategoryItemById,
 } from '../../store/categorySlice';
-import { popupMode } from '../../constants/constants';
+import { POPUP_MODE } from '../../constants/constants';
 import { ConfirmCategoryDeletion, AddSubcategoryPopup } from '../popups';
 import { findCategoryTitleById } from '../../utils';
 import AddItem from '../add-item/AddItem';
@@ -82,11 +82,11 @@ function CategoryList() {
           />
         ))}
 
-      {isPopupOpen === popupMode.DELETE_MODE && (
+      {isPopupOpen === POPUP_MODE.DELETE_MODE && (
         <ConfirmCategoryDeletion okHandler={deleteCategoryHandler} />
       )}
 
-      {isPopupOpen === popupMode.EDIT_MODE && (
+      {isPopupOpen === POPUP_MODE.EDIT_MODE && (
         <AddSubcategoryPopup
           okHandler={(value) => {
             editCategoryHandler(activeCategoryIdState, value);
@@ -98,7 +98,7 @@ function CategoryList() {
         />
       )}
 
-      {isPopupOpen === popupMode.ADD_SUBTASK_MODE && (
+      {isPopupOpen === POPUP_MODE.ADD_SUBTASK_MODE && (
         <AddSubcategoryPopup
           okHandler={(sub) => {
             addSubcategoryHandler(activeCategoryIdState, sub);

@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { categories as categoryList } from '../__mock__/categories';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { URL } from '../constants/constants';
+import { HttpService } from '../services/Http.service';
 import {
   deleteCategoryById,
   editCategoryById,
@@ -7,11 +8,19 @@ import {
 } from '../utils';
 
 const initialState = {
-  categoryList: categoryList,
+  categoryList: [],
   activeCategoryId: 0,
   isPopupOpen: false,
   isEditMode: false,
+  entities: [],
 };
+
+export const fetchCategoriesAsync = createAsyncThunk(
+  'categories/fetchCategories',
+  async () => {
+    return HttpService.get(URL.CATEGORIES);
+  }
+);
 
 export const categorySlice = createSlice({
   name: 'categories',
@@ -52,6 +61,11 @@ export const categorySlice = createSlice({
     setIsEditMode: (state, action) => {
       state.isEditMode = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchCategoriesAsync.fulfilled, (state, action) => {
+      state.categoryList = [...action.payload];
+    });
   },
 });
 

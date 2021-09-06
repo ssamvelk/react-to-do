@@ -1,0 +1,104 @@
+[
+  {
+    "id": 0,
+    "title": "Buy games",
+    "isDone": true,
+    "categoryId": 0
+  },
+  {
+    "id": 1,
+    "title": "Play \"DOTA 2\" 2k+ hours",
+    "isDone": false,
+    "categoryId": 0
+  },
+  {
+    "id": 2,
+    "title": "Delete \"DOTA 2\"  permanently!!!!!!",
+    "isDone": false,
+    "categoryId": 0
+  },
+  {
+    "id": 3,
+    "title": "Buy food",
+    "isDone": true,
+    "categoryId": 1
+  },
+  {
+    "id": 4,
+    "title": "Buy dress",
+    "isDone": false,
+    "categoryId": 1
+  },
+  {
+    "id": 5,
+    "title": "To-Do item # 5",
+    "isDone": true,
+    "categoryId": 2
+  },
+  {
+    "id": 6,
+    "title": "To-Do item # 6",
+    "isDone": true,
+    "categoryId": 3
+  },
+  {
+    "id": 7,
+    "title": "To-Do item # 7",
+    "isDone": false,
+    "categoryId": 4
+  },
+  {
+    "id": 8,
+    "title": "To-Do item # 8",
+    "isDone": true,
+    "categoryId": 5
+  },
+  {
+    "id": 9,
+    "title": "To-Do item # 9",
+    "isDone": true,
+    "categoryId": 6
+  },
+  {
+    "id": 10,
+    "title": "To-Do item # 10",
+    "isDone": false,
+    "categoryId": 7
+  },
+  {
+    "id": 11,
+    "title": "To-Do item # 11",
+    "isDone": true,
+    "categoryId": 8
+  },
+  {
+    "id": 12,
+    "title": "To-Do item # 12",
+    "isDone": false,
+    "categoryId": 9
+  },
+  {
+    "id": 13,
+    "title": "Buy Night Darkness",
+    "isDone": false,
+    "categoryId": 11
+  },
+  {
+    "id": 14,
+    "title": "Buy Mortal Kombat 12",
+    "isDone": false,
+    "categoryId": 12
+  },
+  {
+    "id": 15,
+    "title": "Buy WARHAMMER III",
+    "isDone": false,
+    "categoryId": 13
+  },
+  {
+    "id": 16,
+    "title": "Buy ARK: Survival Evolved",
+    "isDone": false,
+    "categoryId": 14
+  }
+]
