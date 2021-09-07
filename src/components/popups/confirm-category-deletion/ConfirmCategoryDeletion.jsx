@@ -14,6 +14,7 @@ export default function ConfirmCategoryDeletion({ okHandler = null }) {
       <div className='confirm-category-deletion'>
         <Button
           text='Yes'
+          autoFocus={true}
           onClickHandle={() => {
             okHandler();
           }}

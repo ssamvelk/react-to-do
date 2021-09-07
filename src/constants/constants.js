@@ -14,4 +14,16 @@ const HEADERS = {
   Accept: 'application/json',
 };
 
-export { POPUP_MODE, URL, HEADERS };
+const FOCUSABLE_SELECTOR = [
+  'button',
+  'a[href]',
+  'input',
+  'select',
+  'textarea',
+  '[tabindex]',
+  '[contenteditable]',
+]
+  .map((selector) => `${selector}:not(:disabled):not([disabled])`)
+  .join(', ');
+
+export { POPUP_MODE, URL, HEADERS, FOCUSABLE_SELECTOR };

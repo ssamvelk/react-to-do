@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import './Button.scss';
 
-function Button({ text, onClickHandle }) {
+function Button({ text, onClickHandle, autoFocus = false }) {
   return (
-    <button className='button' onClick={onClickHandle}>
+    <button className='button' onClick={onClickHandle} autoFocus={autoFocus}>
       {text}
     </button>
   );

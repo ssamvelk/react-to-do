@@ -19,9 +19,9 @@ function CategoryItem({ id, title, onClickHandler, nestedItems }) {
 
   return (
     <div
-      className={`category${
-        activeCategoryIdState === id && ' category_active'
-      }`}
+      className={
+        activeCategoryIdState === id ? 'category category_active' : 'category'
+      }
     >
       <div className='category__main' onClick={() => onClickHandler(id)}>
         {!isEditModeState && nestedItems.length > 0 && (
