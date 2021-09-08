@@ -37,11 +37,7 @@ function CategoryItem({ id, title, onClickHandler, nestedItems }) {
           </div>
         )}
 
-        <input
-          className='category__title'
-          value={title || `Category ${id}`}
-          readOnly={true}
-        />
+        <input className='category__title' value={title} readOnly={true} />
 
         {!isEditModeState && (
           <p className='category__controls'>

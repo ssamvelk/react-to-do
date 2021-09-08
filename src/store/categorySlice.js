@@ -12,7 +12,7 @@ const initialState = {
   activeCategoryId: 0,
   isPopupOpen: false,
   isEditMode: false,
-  entities: [],
+  ids: [],
 };
 
 export const fetchCategoriesAsync = createAsyncThunk(
@@ -28,6 +28,7 @@ export const categorySlice = createSlice({
   reducers: {
     addCategory: (state, action) => {
       state.categoryList = [action.payload, ...state.categoryList];
+      state.ids = [...state.ids, action.payload.id];
     },
     deleteCategory: (state, action) => {
       state.categoryList = deleteCategoryById(
@@ -61,15 +62,20 @@ export const categorySlice = createSlice({
     setIsEditMode: (state, action) => {
       state.isEditMode = action.payload;
     },
+    setIds: (state, action) => {
+      state.ids = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCategoriesAsync.fulfilled, (state, action) => {
       state.categoryList = [...action.payload];
+      // state.ids = [...getAllCategoriesIds(action.payload)];
     });
   },
 });
 
 export const {
+  setIds,
   setIsEditMode,
   addSubcategoryItemById,
   updateCategoryItemById,
@@ -86,5 +92,6 @@ export const selectActiveCategoryId = (state) =>
   state.categories.activeCategoryId;
 export const selectIsPopupOpen = (state) => state.categories.isPopupOpen;
 export const selectIsEditMode = (state) => state.categories.isEditMode;
+export const selectIds = (state) => state.categories.ids;
 
 export default categorySlice.reducer;

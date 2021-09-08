@@ -15,55 +15,77 @@ import {
 } from '../../store/categorySlice';
 import { POPUP_MODE } from '../../constants/constants';
 import { ConfirmCategoryDeletion, AddSubcategoryPopup } from '../popups';
-import { findCategoryTitleById } from '../../utils';
+import {
+  findCategoryTitleById,
+  getSelfAndNestedCategoryIds,
+  getActiveCategoryById,
+} from '../../utils';
 import AddItem from '../add-item/AddItem';
 
 import './CategoryList.scss';
+import { deleteTasksByCategoryId } from '../../store/taskSlice';
 
 function CategoryList() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const activeCategoryIdState = useSelector(selectActiveCategoryId);
   const isPopupOpen = useSelector(selectIsPopupOpen);
   const categoriesState = useSelector(selectCategoriesList);
+  const activeCategoryIdState = useSelector(selectActiveCategoryId);
 
   const [activeItem, setActiveItem] = useState(activeCategoryIdState);
 
   const onClickHandler = (id) => {
     setActiveItem(id);
     dispatch(setActiveCategoryId(id));
-    history.push(`${id}`);
+    id !== null ? history.push(`${id}`) : history.replace('');
   };
 
   const addNewCategory = useCallback((value) => {
+    const id = Date.now();
     dispatch(
       addCategory({
-        id: Date.now(),
-        title: value,
+        id,
+        title: value || `Category ${id}`,
         nestedItems: [],
       })
     );
+    onClickHandler(id);
   });
 
   const deleteCategoryHandler = useCallback(() => {
+    const ids = getSelfAndNestedCategoryIds(
+      getActiveCategoryById(categoriesState, activeItem)
+    );
+
     dispatch(deleteCategory(activeItem));
-    if (categoriesState.length > 0) {
-      dispatch(setActiveCategoryId(categoriesState[0].id));
-    } else {
-      dispatch(setActiveCategoryId(null));
+    ids.forEach((id) => dispatch(deleteTasksByCategoryId(id)));
+
+    if (categoriesState.length > 1) {
+      if (activeItem === categoriesState[0].id) {
+        onClickHandler(categoriesState[1].id);
+      } else onClickHandler(categoriesState[0].id);
+    } else if (categoriesState.length === 1) {
+      onClickHandler(null);
     }
     dispatch(setIsPopupOpen(false));
-  });
+  }, [activeItem, categoriesState, categoriesState.length, dispatch]);
 
-  const editCategoryHandler = useCallback((id, value) => {
-    dispatch(updateCategoryItemById({ id, value })); // update Category
-    dispatch(setIsPopupOpen(false));
-  });
+  const editCategoryHandler = useCallback(
+    (id, value) => {
+      dispatch(updateCategoryItemById({ id, value })); // update Category
+      dispatch(setIsPopupOpen(false));
+    },
+    [dispatch]
+  );
 
-  const addSubcategoryHandler = useCallback((id, subcategory) => {
-    dispatch(addSubcategoryItemById({ id, subcategory }));
-    dispatch(setIsPopupOpen(false));
-  });
+  const addSubcategoryHandler = useCallback(
+    (id, subcategory) => {
+      dispatch(addSubcategoryItemById({ id, subcategory }));
+      dispatch(setIsPopupOpen(false));
+      onClickHandler(subcategory.id);
+    },
+    [dispatch, onClickHandler]
+  );
 
   return (
     <div className='category-list'>

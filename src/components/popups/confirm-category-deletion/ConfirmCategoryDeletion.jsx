@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { setIsPopupOpen } from '../../../store/categorySlice';
 import Button from '../../button/Button';
@@ -8,6 +8,10 @@ import './ConfirmCategoryDeletion.scss';
 
 export default function ConfirmCategoryDeletion({ okHandler = null }) {
   const dispatch = useDispatch();
+  const cancelHandler = useCallback(
+    () => dispatch(setIsPopupOpen(false)),
+    [dispatch]
+  );
 
   return (
     <BasePopup title='Are you want to delete the category?'>
@@ -19,10 +23,7 @@ export default function ConfirmCategoryDeletion({ okHandler = null }) {
             okHandler();
           }}
         />
-        <Button
-          text='Cancel'
-          onClickHandle={() => dispatch(setIsPopupOpen(false))}
-        />
+        <Button text='Cancel' onClickHandle={cancelHandler} />
       </div>
     </BasePopup>
   );

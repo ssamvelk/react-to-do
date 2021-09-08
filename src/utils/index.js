@@ -3,6 +3,8 @@ import editCategoryById from './editCategoryById';
 import findCategoryTitleById from './findCategoryTitleById';
 import addSubcategoryById from './addSubcategoryById';
 import debounce from './debounce';
+import getSelfAndNestedCategoryIds from './getSelfAndNestedCategoryIds';
+import getActiveCategoryById from './getActiveCategoryById';
 
 export {
   debounce,
@@ -10,4 +12,6 @@ export {
   editCategoryById,
   findCategoryTitleById,
   addSubcategoryById,
+  getSelfAndNestedCategoryIds,
+  getActiveCategoryById,
 };

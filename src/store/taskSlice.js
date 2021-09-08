@@ -27,6 +27,11 @@ export const taskSlice = createSlice({
     deleteTask: (state, action) => {
       state.taskList = state.taskList.filter((item) => item.id !== action.id);
     },
+    deleteTasksByCategoryId: (state, action) => {
+      state.taskList = state.taskList.filter(
+        (item) => item.categoryId !== action.payload
+      );
+    },
     updateTaskById: (state, action) => {
       state.taskList = state.taskList.map((item) => {
         if (item.id === action.payload.id) return action.payload;
@@ -57,6 +62,7 @@ export const taskSlice = createSlice({
 });
 
 export const {
+  deleteTasksByCategoryId,
   setProgress,
   setSearchValueAction,
   toggleShowOnlyDone,
