@@ -43,10 +43,11 @@ function TaskList() {
 
   const addNewTask = useCallback(
     (value) => {
+      const id = Date.now();
       dispatch(
         addTask({
-          id: Date.now(),
-          title: value,
+          id,
+          title: value || `To-Do ${id}`,
           isDone: false,
           categoryId: activeCategoryId,
         })
@@ -55,16 +56,16 @@ function TaskList() {
     [activeCategoryId]
   );
 
-  if (taskFilter)
-    currentTasks = currentTasks.filter((task) =>
-      task.title.includes(taskFilter)
-    );
-  if (showOnlyDone)
-    currentTasks = currentTasks.filter((task) => task.isDone === true);
-
   useEffect(() => {
+    if (taskFilter)
+      currentTasks = currentTasks.filter((task) =>
+        task.title.toLowerCase().includes(taskFilter.toLowerCase().trim())
+      );
+    if (showOnlyDone)
+      currentTasks = currentTasks.filter((task) => task.isDone === true);
+
     calculateProgress(currentTasks);
-  }, [currentTasks]);
+  }, [currentTasks, taskFilter]);
 
   return (
     <div className='task-list'>
