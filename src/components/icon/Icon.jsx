@@ -8,14 +8,15 @@ export default function Icon({
   notPropagate = false,
   additionalClass = 'icon',
   altName = 'image',
+  size = 20,
 }) {
   return (
     <img
       src={`/img/${type}.png`}
       className={additionalClass}
       alt={altName}
-      width='20px'
-      height='20px'
+      width={`${size}px`}
+      height={`${size}px`}
       onClick={(e) => {
         if (notPropagate) {
           e.preventDefault();

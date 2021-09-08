@@ -69,7 +69,6 @@ export const categorySlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchCategoriesAsync.fulfilled, (state, action) => {
       state.categoryList = [...action.payload];
-      // state.ids = [...getAllCategoriesIds(action.payload)];
     });
   },
 });

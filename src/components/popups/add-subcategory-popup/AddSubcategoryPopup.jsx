@@ -41,6 +41,7 @@ export default function AddSubcategoryPopup({
         <div className='add-subcategory__controls'>
           <Button
             text='Add'
+            autoFocus={true}
             onClickHandle={() => {
               if (mode === POPUP_MODE.EDIT_MODE) {
                 okHandler(title);

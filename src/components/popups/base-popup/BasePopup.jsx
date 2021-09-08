@@ -1,5 +1,4 @@
 import React from 'react';
-// import FocusTrap from 'focus-trap-react';
 import FocusTrap from '../../FocusTrap/FocusTrap';
 import Backdrop from '../../backdrop/Backdrop';
 

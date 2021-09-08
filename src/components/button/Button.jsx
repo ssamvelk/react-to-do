@@ -11,7 +11,7 @@ function Button({ text, onClickHandle, autoFocus = false }) {
   );
 }
 
-Button.propTypes = {
+Button.defaultProps = {
   text: 'Click me please!',
   onClickHandle: () => console.log('Click'),
 };

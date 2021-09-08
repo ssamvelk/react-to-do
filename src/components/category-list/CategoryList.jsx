@@ -72,7 +72,7 @@ function CategoryList() {
 
   const editCategoryHandler = useCallback(
     (id, value) => {
-      dispatch(updateCategoryItemById({ id, value })); // update Category
+      dispatch(updateCategoryItemById({ id, value }));
       dispatch(setIsPopupOpen(false));
     },
     [dispatch]

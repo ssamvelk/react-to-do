@@ -36,11 +36,6 @@
     cursor: pointer;
     transition: 0.3s all;
 
-    .icon {
-      width: 30px;
-      height: 30px;
-    }
-
     &:hover {
       transform: scale(1.05);
     }

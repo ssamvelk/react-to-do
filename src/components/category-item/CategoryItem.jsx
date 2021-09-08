@@ -67,11 +67,7 @@ function CategoryItem({ id, title, onClickHandler, nestedItems }) {
 
         {isEditModeState && (
           <div className='category__undo'>
-            <Icon
-              type='undo'
-              altName='undo'
-              // onClickHandler={}
-            />
+            <Icon type='undo' altName='undo' />
           </div>
         )}
       </div>

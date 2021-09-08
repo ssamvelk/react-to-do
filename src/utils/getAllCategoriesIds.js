@@ -10,7 +10,6 @@ export default function getAllCategoriesIds(arr) {
     });
 
   sliceIds(arr);
-  console.log('ids', ids);
   const uniq = new Set(ids);
   return [...uniq];
 }

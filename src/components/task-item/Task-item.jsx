@@ -33,6 +33,7 @@ function TaskItem(props) {
             altName='edit'
             onClickHandler={() => null}
             isPropagate={true}
+            size={30}
           />
         </Link>
       </span>
